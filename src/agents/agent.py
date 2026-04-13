@@ -16,6 +16,13 @@ from tools.alert_tool import create_follow_up_alert, get_pending_reminders, comp
 from tools.relationship_suggestion_tool import generate_referral_script, analyze_relationship_gaps, get_high_value_contacts
 from tools.template_tool import generate_alumni_template, generate_industry_template, generate_contact_template
 from tools.notification_tool import configure_feishu_webhook, send_feishu_message, send_reminder_card
+from tools.broadcast_tool import (
+    broadcast_pending_reminders,
+    push_high_value_contacts,
+    push_daily_summary,
+    push_weekly_report,
+    push_contact_birthday_upcoming
+)
 
 # type: ignore  # 忽略类型检查错误
 
@@ -86,7 +93,14 @@ def build_agent(ctx=None):
         # 推送渠道管理（飞书）
         configure_feishu_webhook,
         send_feishu_message,
-        send_reminder_card
+        send_reminder_card,
+
+        # 批量推送功能
+        broadcast_pending_reminders,
+        push_high_value_contacts,
+        push_daily_summary,
+        push_weekly_report,
+        push_contact_birthday_upcoming
     ]
 
     return create_agent(
